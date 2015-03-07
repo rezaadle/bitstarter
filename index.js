@@ -5,7 +5,9 @@ app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-  response.send('DiaryDr!')
+  var fs = require('fs');
+  var buf = new Buffer(fs.readFileSync('web.html','utf8'));
+  response.send(buf.toString());
 })
 
 app.listen(app.get('port'), function() {
